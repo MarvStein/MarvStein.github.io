@@ -40,7 +40,7 @@ author:
 
 # Build settings
 markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes
+remote_theme: mmistakes/minimal-mistakes@4.27.3
 # Outputting
 permalink: /:categories/:title/
 timezone: Europe/Zurich
@@ -68,3 +68,6 @@ tag_archive:
 # Hide the RSS feed link in the footer
 atom_feed:
   hide: true
+
+plugins:
+  - jekyll-include-cache
