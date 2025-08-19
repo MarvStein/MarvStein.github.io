@@ -1,0 +1,15 @@
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Mac OS
+.DS_Store
+
+# VS Code
+.vscode/
