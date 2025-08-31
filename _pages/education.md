@@ -15,3 +15,5 @@ author_profile: true
 
 - **Specialization:** Embedded Systems and Software Engineering
 - **Bachelor Thesis:** "Design of a Spatial-Aware, Event-Driven Sensing Network"
+
+{% include figure popup=true image_path="/assets/images/pcb_bachelor_thesis.png" alt="PCB" caption="Rendering of the PCB for the sensing network." %}
