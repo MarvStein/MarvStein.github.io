@@ -34,3 +34,8 @@ author_profile: true
 - Developed the embedded software and a GUI for real-time telemetry and control
 - Performed risk analysis and presented technical findings in reports and presentations
 - Won 4 out of 6 technical awards at the *European Hyperloop Week 2023*
+
+<video autoplay muted loop playsinline width="100%">
+  <source src="/assets/videos/swissloop_rendering.mp4" type="video/mp4">
+  Sorry, your browser doesn't support embedded videos.
+</video>
