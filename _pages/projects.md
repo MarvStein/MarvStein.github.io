@@ -117,7 +117,7 @@ We developed a *Model Predictive Controller (MPC)* that uses the *Cross-Entropy 
 
 Below is a small interactive demo of the underlying interaction model. **Your mouse is used to control the red fish directly.** All other fish may only be influenced indirectly through interactions with the red fish.
 
-<canvas id="fish-simulation" width="760" height="400" style="background-color: #f0f8ff; border: 1px solid #ccc; border-radius: 4px;"></canvas>
+<canvas id="fish-simulation" width="760" height="400" style="background-color: #f0f8ff; border: 1px solid #ccc; border-radius: 4px; width: 100%; max-width: 760px; height: auto; display: block;"></canvas>
 <script src="/assets/js/fish-demo.js"></script>
 *Interactive demo of the fish school. Use your mouse to control the red fish and influence all others.*
 
