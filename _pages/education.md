@@ -9,6 +9,7 @@ author_profile: true
 *ETH Zürich, Switzerland* *Sept. 2024 - Present*
 
 - **Specialization:** Robotics, Control Systems, Machine Learning
+- **Semester Project:** "A Benchmark for Centralized Reinforcement Learning in Multi-Robot, Multi-Goal Environments" (see [Projects](/projects/) for details)
 
 ### BSc. Electrical Engineering & Information Technology
 *ETH Zürich, Switzerland* *Sept. 2020 - Mar. 2024*
