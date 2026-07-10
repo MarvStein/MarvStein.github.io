@@ -7,15 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
 
     // --- Simulation Constants (tuned for visualization) ---
-    const FISH_COUNT = 60;
+    const FISH_COUNT = 100;
     const FISH_SPEED = 1.2;
     const MAX_TURN_RATE = 0.08; // Radians per frame
-    const SHILL_INFLUENCE = 5; // How much stronger the red fish's influence is
+    const SHILL_INFLUENCE = 8; // How much stronger the red fish's influence is
 
     // Couzin model radii, scaled for the canvas
     const R_REPEL = 20;   // Zone of Repulsion
     const R_ORIENT = 50;  // Zone of Orientation
     const R_ATTRACT = 100; // Zone of Attraction
+
+    // --- Color palette (muted teal/gray, matching the site's theme) ---
+    const COLOR_BG = '240, 248, 255';   // canvas background
+    const COLOR_FISH = '47, 125, 149';  // muted teal-blue, matches site accent color
+    const COLOR_SHILL = '220, 50, 50';  // muted terracotta, kept distinct from the school
 
     let school = [];
     let shill = null; // Reference to the red fish
@@ -138,12 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.save();
             ctx.translate(this.pos.x, this.pos.y);
             ctx.rotate(angle);
+            // Tapered, forked-tail body instead of a flat triangle
             ctx.beginPath();
-            ctx.moveTo(10, 0);
-            ctx.lineTo(-5, -5);
-            ctx.lineTo(-5, 5);
+            ctx.moveTo(11, 0);
+            ctx.quadraticCurveTo(3, -5, -6, -3);
+            ctx.quadraticCurveTo(-2, 0, -6, 3);
+            ctx.quadraticCurveTo(3, 5, 11, 0);
             ctx.closePath();
-            ctx.fillStyle = this.isShill ? "rgba(220, 50, 50, 0.9)" : "rgba(40, 100, 200, 0.8)";
+            ctx.fillStyle = this.isShill ? `rgba(${COLOR_SHILL}, 0.9)` : `rgba(${COLOR_FISH}, 0.8)`;
             ctx.fill();
             ctx.restore();
         }
@@ -158,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ctx.save();
         ctx.beginPath();
-        ctx.strokeStyle = "rgba(220, 50, 50, 0.6)";
+        ctx.strokeStyle = `rgba(${COLOR_SHILL}, 0.55)`;
         ctx.lineWidth = 2;
         ctx.setLineDash([2, 5]);
         ctx.moveTo(ghost.pos.x, ghost.pos.y);
@@ -196,8 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mouse Handling ---
     canvas.addEventListener('mousemove', e => {
         const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
+        // Scale from the canvas's displayed (CSS) size to its internal resolution,
+        // since the canvas is responsive and its displayed size can differ from width/height.
+        mouse.x = (e.clientX - rect.left) * (canvas.width / rect.width);
+        mouse.y = (e.clientY - rect.top) * (canvas.height / rect.height);
         mouse.active = true;
     });
     canvas.addEventListener('mouseleave', () => {
@@ -217,7 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Fade the previous frame instead of a hard clear, leaving soft motion trails.
+        ctx.fillStyle = `rgba(${COLOR_BG}, 0.7)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // draw dotted path from shill to mouse
         if (mouse.active && shill) {
